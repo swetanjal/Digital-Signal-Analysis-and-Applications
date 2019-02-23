@@ -1,6 +1,7 @@
 faces = imread('Faces.jpg');
 exact_face = imread('F1.jpg');
 noisy_face = imread('F2.jpg');
+noisy_face = smoothdata(noisy_face, 'movmedian');
 faces = im2double(faces);
 exact_face = im2double(exact_face);
 [R, C, d] = size(faces);
@@ -55,7 +56,7 @@ for i = 1:R
                     break;
                 end
                 %disp(abs(faces(i + k, j + l, 2) - exact_face(k + 1, l + 1, 2)));
-                diff = diff + abs(faces(i + k, j + l, 1) - noisy_face(k + 1, l + 1, 1)) * abs(faces(i + k, j + l, 1) - noisy_face(k + 1, l + 1, 1)) + abs(faces(i + k, j + l, 2) - noisy_face(k + 1, l + 1, 2)) * abs(faces(i + k, j + l, 2) - noisy_face(k + 1, l + 1, 2)) + abs(faces(i + k, j + l, 3) - noisy_face(k + 1, l + 1, 3)) * abs(faces(i + k, j + l, 3) - noisy_face(k + 1, l + 1, 3));
+                diff = diff + abs(faces(i + k, j + l, 1) - noisy_face(k + 1, l + 1, 1)) + abs(faces(i + k, j + l, 2) - noisy_face(k + 1, l + 1, 2)) + abs(faces(i + k, j + l, 3) - noisy_face(k + 1, l + 1, 3));
             end
             if flag == 0
                 break
@@ -63,7 +64,7 @@ for i = 1:R
         end
         %disp(diff);
         if flag == 1
-            if diff <= minimum_diff
+            if diff < minimum_diff
                 minimum_diff = diff;
                 x = i;
                 y = j;
@@ -81,7 +82,7 @@ rectangle('Position', [y_exact, x_exact, c, r],...
    'Curvature', [0, 0], ...
    'EdgeColor', 'r',...
     'LineWidth', 2, 'LineStyle', '-');
-rectangle('Position', [y_noisy, x_noisy, c, r],...
-   'Curvature', [0, 0], ...
-   'EdgeColor', 'b',...
-    'LineWidth', 2, 'LineStyle', '-');
+%rectangle('Position', [y_noisy, x_noisy, c, r],...
+%   'Curvature', [0, 0], ...
+%   'EdgeColor', 'b',...
+%    'LineWidth', 2, 'LineStyle', '-');

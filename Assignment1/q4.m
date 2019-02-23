@@ -2,9 +2,8 @@ img = imread('q4.jpg');
 img2 = imread('rose.jpg');
 %imshow(RESIZE_BLACK_AND_WHITE_NEAREST_NEIGHBOUR(img, 2));
 %imshow(RESIZE_COLOR_NEAREST_NEIGHBOUR(img2, 2));
-
-%imshow(RESIZE_COLOR_BILINEAR(img2, 5));
-imshow(RESIZE_BLACK_AND_WHITE_BILINEAR(img, 10));
+imshow(RESIZE_COLOR_BILINEAR(img2, 5));
+%imshow(RESIZE_BLACK_AND_WHITE_BILINEAR(img, 10));
 function output = RESIZE_BLACK_AND_WHITE_NEAREST_NEIGHBOUR(img, X)
     img = rgb2gray(img);    
     img = im2double(img);
@@ -88,10 +87,10 @@ function output = RESIZE_BLACK_AND_WHITE_BILINEAR(img, X)
             tmp_x = i * 1.0 / X;
             tmp_y = j * 1.0 / X;
             val = 0;
-            val = val + img(max(1,floor(tmp_x)), max(1,floor(tmp_y))) * abs(tmp_x - max(1,floor(tmp_x))) * abs(tmp_y - max(1,floor(tmp_y)));
-            val = val + img(max(1,floor(tmp_x)), min(c, ceil(tmp_y))) * abs(tmp_x - max(1, floor(tmp_x))) * abs(tmp_y - min(c, ceil(tmp_y)));
-            val = val + img(min(r, ceil(tmp_x)), max(1, floor(tmp_y))) * abs(tmp_x - min(r, ceil(tmp_x))) * abs(tmp_y - max(1, floor(tmp_y)));
-            val = val + img(min(r, ceil(tmp_x)), min(c, ceil(tmp_y))) * abs(tmp_x - min(r, ceil(tmp_x))) * abs(tmp_y - min(c, ceil(tmp_y)));
+            val = val + img(max(1,floor(tmp_x)), max(1,floor(tmp_y))) * (1 - abs(tmp_x - max(1,floor(tmp_x)))) * (1 - abs(tmp_y - max(1,floor(tmp_y))));
+            val = val + img(max(1,floor(tmp_x)), min(c, ceil(tmp_y))) * (1 - abs(tmp_x - max(1, floor(tmp_x)))) * (1 - abs(tmp_y - min(c, ceil(tmp_y))));
+            val = val + img(min(r, ceil(tmp_x)), max(1, floor(tmp_y))) * (1 - abs(tmp_x - min(r, ceil(tmp_x)))) * (1 - abs(tmp_y - max(1, floor(tmp_y))));
+            val = val + img(min(r, ceil(tmp_x)), min(c, ceil(tmp_y))) * (1 - abs(tmp_x - min(r, ceil(tmp_x)))) * (1 - abs(tmp_y - min(c, ceil(tmp_y))));
             output(i, j) = val;
         end
     end
@@ -110,10 +109,10 @@ function output = RESIZE_COLOR_BILINEAR(img, X)
                 tmp_x = i * 1.0 / X;
                 tmp_y = j * 1.0 / X;
                 val = 0;
-                val = val + img(max(1,floor(tmp_x)), max(1,floor(tmp_y)), k) * abs(tmp_x - max(1,floor(tmp_x))) * abs(tmp_y - max(1,floor(tmp_y)));
-                val = val + img(max(1,floor(tmp_x)), min(c, ceil(tmp_y)), k) * abs(tmp_x - max(1, floor(tmp_x))) * abs(tmp_y - min(c, ceil(tmp_y)));
-                val = val + img(min(r, ceil(tmp_x)), max(1, floor(tmp_y)), k) * abs(tmp_x - min(r, ceil(tmp_x))) * abs(tmp_y - max(1, floor(tmp_y)));
-                val = val + img(min(r, ceil(tmp_x)), min(c, ceil(tmp_y)), k) * abs(tmp_x - min(r, ceil(tmp_x))) * abs(tmp_y - min(c, ceil(tmp_y)));
+                val = val + img(max(1,floor(tmp_x)), max(1,floor(tmp_y)), k) * (1 - abs(tmp_x - max(1,floor(tmp_x)))) * (1 - abs(tmp_y - max(1,floor(tmp_y))));
+                val = val + img(max(1,floor(tmp_x)), min(c, ceil(tmp_y)), k) * (1 - abs(tmp_x - max(1, floor(tmp_x)))) * (1 - abs(tmp_y - min(c, ceil(tmp_y))));
+                val = val + img(min(r, ceil(tmp_x)), max(1, floor(tmp_y)), k) * (1 - abs(tmp_x - min(r, ceil(tmp_x)))) * (1 - abs(tmp_y - max(1, floor(tmp_y))));
+                val = val + img(min(r, ceil(tmp_x)), min(c, ceil(tmp_y)), k) * (1 - abs(tmp_x - min(r, ceil(tmp_x))) * abs(tmp_y - min(c, ceil(tmp_y))));
                 output(i, j, k) = val;
             end
         end
