@@ -1,0 +1,96 @@
+[y, Fs] = audioread('tone.wav');
+plot(y);
+low_freq = [0,0,0,0,0,0,0,0,0,0];
+high_freq = [0,0,0,0,0,0,0,0,0,0];
+for j = 0:9
+    file = strcat(strcat('./q3/', int2str(j)), '.ogg');
+    [tone0, fs] = audioread(file);
+    %sound(tone0, Fs);
+    %plot(tone0)
+    X = fft(tone0);
+    X_mag = abs(X);
+    X_angle = angle(X);
+    %stem(X_mag)
+    low = -1;
+    high = -1;
+    c = 0;
+    for i = 1:size(X_mag)
+        if X_mag(i) > 2000
+            c = c+1;
+            if low == -1
+                low = i - 1;
+            elseif high == -1
+                high = i - 1;
+            end
+        end
+        if c == 2
+            break
+        end
+    end
+    low_freq(j + 1) = low;
+    high_freq(j + 1) = high;
+end
+idx = [];
+for i = 2 : size(y)
+    if not(y(i) == 0) && y(i - 1) == 0
+        if size(idx) > 0 
+            if abs(i - idx(size(idx))) >= 1100
+                idx = [idx, i];
+            end
+        else
+            idx = [idx, i];
+        end
+    end
+    if y(i) == 0 && not(y(i - 1) == 0)
+        if size(idx) > 0 
+            if abs(i - idx(size(idx))) >= 1100
+                idx = [idx, i];
+            end
+        else
+            idx = [idx, i];
+        end
+    end
+end
+ans_low = [];
+ans_high = [];
+for i = 1 : size(idx, 2)
+    if mod(i, 2) == 0
+        temp = y(idx(i - 1) : idx(i));
+        X = fft(temp);
+        X_mag = abs(X);
+        %stem(X_mag);
+        low = -1;
+        high = -1;
+        c = 0;
+        for j = 1:size(X_mag)
+            if X_mag(j) > 250
+                c = c+1;
+                if low == -1
+                    low = j - 1;
+                elseif high == -1
+                    high = j - 1;
+                end
+            end
+            if c == 2
+                break
+            end
+        end
+        ans_low = [ans_low, (low * Fs * 1.0 / size(temp,1))];
+        ans_high= [ans_high, (high * Fs * 1.0 / size(temp,1))];
+    end
+end
+ret = []
+for i = 1 : size(ans_high, 2)
+    ldiff = 1000000;
+    hdiff = 1000000;
+    nos = -1;
+    for j = 1 : size(low_freq, 2)
+       if(abs(low_freq(j) - ans_low(i)) <= ldiff && abs(high_freq(j) - ans_high(i)) <= hdiff)
+          ldiff =  abs(low_freq(j) - ans_low(i));
+          hdiff = abs(high_freq(j) - ans_high(i));
+          nos = j - 1;
+       end   
+    end
+    ret = [ret, nos];
+end
+disp(ret);
