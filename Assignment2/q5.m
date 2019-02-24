@@ -6,7 +6,7 @@
 %imagesc(log(abs(inbuilt)));
 %%%%%%%%
 %%% FFT
-arr = [1;2;3;4];
+arr = [1,2;3,4];
 disp(RECURSIVEtwodFFT(arr));
 disp(twodDFT(arr));
 disp(fft2(arr));
@@ -14,18 +14,32 @@ disp(fft2(arr));
 function output = twodDFT(I)
     N1 = size(I, 2);
     N2 = size(I, 1);
-    WN1 = zeros(N1);
-    WN2 = zeros(N2);
-    for m = 1:N1
-        for k = 1:N1
-            WN1(m, k) = exp(-1i*2.0*pi*(m - 1)*(k - 1)*1.0/N1);
-        end
-    end
-    for m = 1:N2
-        for k = 1:N2
-            WN2(m, k) = exp(-1i*2.0*pi*(m - 1)*(k - 1)*1.0/N2);
-        end
-    end
+    %WN1 = zeros(N1);
+    %WN2 = zeros(N2);
+    %for m = 1:N1
+    %    for k = 1:N1
+    %        WN1(m, k) = exp(-1i*2.0*pi*(m - 1)*(k - 1)*1.0/N1);
+    %    end
+    %end
+    %for m = 1:N2
+    %    for k = 1:N2
+    %        WN2(m, k) = exp(-1i*2.0*pi*(m - 1)*(k - 1)*1.0/N2);
+    %    end
+    %end
+    WN1_tmp1 = zeros(N1);
+    WN1_tmp1(:,1) = [0:N1-1].';
+    WN1_tmp2 = zeros(N1);
+    WN1_tmp2(1,:) = [0:N1-1];
+    WN1 = WN1_tmp1 * WN1_tmp2;
+    
+    WN2_tmp1 = zeros(N2);
+    WN2_tmp1(:,1) = [0:N2-1].';
+    WN2_tmp2 = zeros(N2);
+    WN2_tmp2(1,:) = [0:N2-1];
+    WN2 = WN2_tmp1 * WN2_tmp2;
+    
+    WN1 = exp(-1i*2.0*pi/N1) .^ WN1;
+    WN2 = exp(-1i*2.0*pi/N2) .^ WN2;
     output = WN2 * I * WN1;
 end
 %%% FFT
@@ -52,17 +66,20 @@ function y = RECURSIVEonedFFT(a)
 end
 
 function output = RECURSIVEtwodFFT(I)
-    N1 = size(I, 2);
-    N2 = size(I, 1);
-    colffts = [];
-    output = [];
-    for i = 1 : N1
-       temp = I(:, i:i);
-       colffts = [colffts, RECURSIVEonedFFT(temp)];
-    end
-    for i = 1 : N2
-       temp = colffts(i:i, :).';
-       output = [output, RECURSIVEonedFFT(temp)];
-    end
+    %N1 = size(I, 2);
+    %N2 = size(I, 1);
+    %colffts = [];
+    %output = [];
+    %for i = 1 : N1
+    %   temp = I(:, i:i);
+    %   colffts = [colffts, RECURSIVEonedFFT(temp)];
+    %end
+    %for i = 1 : N2
+    %   temp = colffts(i:i, :).';
+    %   output = [output, RECURSIVEonedFFT(temp)];
+    %end
+    colffts = RECURSIVEonedFFT(I);
+    colffts = colffts.';
+    output = RECURSIVEonedFFT(colffts);
     output = output.';
 end

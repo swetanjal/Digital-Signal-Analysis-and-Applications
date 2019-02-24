@@ -1,0 +1,1 @@
+imagesc(log(abs(fft(fft(imread('cameraman.tif'))))));
