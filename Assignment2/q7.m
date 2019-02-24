@@ -1,4 +1,5 @@
-imshow(spec(1000, 1000), [0 255]);
+imagesc(spec(1000, 1));
+spectrogram(audioread('chirp.wav'), 1000);
 %%%%Part 2
 %spectrogram(audioread('message.wav'), 2000, 'yaxis');
 %%% Answer is Joker.
@@ -51,6 +52,7 @@ function output = part3()
        end
     end
     sound(output, Fs);
+    spectrogram(output, 2000, 'yaxis');
 end
 %%%%%%%%%%
 

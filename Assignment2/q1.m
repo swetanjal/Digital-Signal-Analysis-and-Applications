@@ -6,12 +6,19 @@ img = imread('cameraman.tif');
 %imshow(imfilter(img, gauss_filter(67, 10)));
 %imshow(imfilter(img, gauss_filter(67, 3)));
 %imshow(imfilter(img, gauss_filter(67, 1)));
-%disp(abs(fspecial('gaussian', 67, 3) - gauss_filter(67, 3)))
+%imshow(imfilter(img, gauss_filter(80, 10)));
+%imshow(imfilter(img, gauss_filter(80, 3)));
+%imshow(imfilter(img, gauss_filter(100, 3)));
+F = fspecial('gaussian', 11, 3);
+G = gauss_filter(11, 3);
+%imshow(gauss_filter(100, 3), []);
+%imshow(fspecial('gaussian', 67, 10), []);
 %%%%%%%%%%%
 
 
 %%%% Part 4
 %inp1 = imread('inp1.png');
+%imshow(inp1);
 %imshow(median_filter(inp1, 3));
 %%%%%%%%%%%
 
@@ -47,8 +54,18 @@ function output = gauss_filter(N, sigma)
             output(i,j) = exp(-((x2 * 1.0) / (2 * sigma * sigma)) -((y2 * 1.0) / (2 * sigma * sigma)));            
         end
     end
-    res = sum(sum(output));
+    res = sum(output(:));
     output = output / res;
     %disp(res);
 end
+%%%%%%%%%
+
+%%%% Part 5
+function output = part5()
+    img = imread('inp2.png');
+    F = abs(fftshift(fft2(img)));
+    L = log(F);
+    imshow(L, []);
+end
+
 %%%%%%%%%

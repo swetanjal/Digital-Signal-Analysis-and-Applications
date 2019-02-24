@@ -58,7 +58,6 @@ for i = 1 : size(idx, 2)
         temp = y(idx(i - 1) : idx(i));
         X = fft(temp);
         X_mag = abs(X);
-        %stem(X_mag);
         low = -1;
         high = -1;
         c = 0;

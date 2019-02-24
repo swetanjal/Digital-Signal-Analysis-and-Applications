@@ -1,15 +1,57 @@
 %%% DFT
-%img = double(imread('inp1.png'));
+%img = double(imread('fruits.png'));
 %inbuilt = fft2(img);
 %DFT = twodDFT(img);
 %imagesc(log(abs(DFT)));
 %imagesc(log(abs(inbuilt)));
+%FFT = RECURSIVEtwodFFT(img);
+%imagesc(log(abs(FFT)));
 %%%%%%%%
 %%% FFT
-arr = [1,2;3,4];
-disp(RECURSIVEtwodFFT(arr));
-disp(twodDFT(arr));
-disp(fft2(arr));
+%arr = [1,2;3,4];
+%disp(RECURSIVEtwodFFT(arr));
+%disp(twodDFT(arr));
+%disp(fft2(arr));
+x = [10; 100; 1000; 5000];
+xdash = [8;128;1024;4096];
+timedft = [0; 0; 0; 0];
+timefft = [0; 0; 0; 0];
+mat = rand(10, 10);
+tic
+twodDFT(mat);
+timedft(1, :) = toc;
+mat = rand(100, 100);
+tic
+twodDFT(mat);
+timedft(2, :) = toc;
+mat = rand(1000, 1000);
+tic
+twodDFT(mat);
+timedft(3, :) = toc;
+mat = rand(5000, 5000);
+tic
+twodDFT(mat);
+timedft(4, :) = toc;
+
+mat = rand(8, 8);
+tic
+RECURSIVEtwodFFT(mat);
+timefft(1, :) = toc;
+mat = rand(128, 128);
+tic
+RECURSIVEtwodFFT(mat);
+timefft(2, :) = toc;
+mat = rand(1024, 1024);
+tic
+RECURSIVEtwodFFT(mat);
+timefft(3, :) = toc;
+mat = rand(4096, 4096);
+tic
+RECURSIVEtwodFFT(mat);
+timefft(4, :) = toc;
+hold on;
+plot(x, timedft);
+plot(xdash, timefft);
 %%%%%%%
 function output = twodDFT(I)
     N1 = size(I, 2);
