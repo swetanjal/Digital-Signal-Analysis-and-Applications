@@ -1,5 +1,5 @@
-imagesc(spec(1000, 1));
-spectrogram(audioread('chirp.wav'), 1000);
+spec(1000, 2);
+%spectrogram(audioread('chirp.wav'), 1000, 2, 'yaxis');
 %%%%Part 2
 %spectrogram(audioread('message.wav'), 2000, 'yaxis');
 %%% Answer is Joker.
@@ -57,20 +57,12 @@ end
 %%%%%%%%%%
 
 %%%%Part 1
-function output = spec(w_sz, stride)
+function spec(w_sz, stride)
     [y, Fs] = audioread('chirp.wav');
-    output = zeros(w_sz,size(y, 1));
-    for i = 1 : stride : size(y, 1) - w_sz
-        temp = y(i : i + w_sz - 1 , :);
-        mat = abs(fft(temp));
-        %mat = mat ./ max(mat);
-        %mat = mat .* 256;
-        for j = i : i + w_sz - 1
-           output(:, j:j) = output(:, j:j) + mat; 
-        end
-    end
-    output = output ./ max(output);
-    output = output .* 255;
+    flatten1 = im2col(y, [w_sz, 1], 'sliding');
+    flatten1 = flatten1(:, 1 : stride : end);
+    specto = fft(flatten1);
+    imagesc(flipud(abs(specto(1:size(specto,1)/2, :))));
 end
 
 %%%%%%%%%%

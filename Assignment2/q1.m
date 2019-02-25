@@ -1,5 +1,5 @@
 %%% Part 3
-img = imread('cameraman.tif');
+%img = imread('cameraman.tif');
 %imshow(median_filter(img, 1));
 %imshow(median_filter(img, 5));
 %imshow(median_filter(img, 10));
@@ -9,12 +9,12 @@ img = imread('cameraman.tif');
 %imshow(imfilter(img, gauss_filter(80, 10)));
 %imshow(imfilter(img, gauss_filter(80, 3)));
 %imshow(imfilter(img, gauss_filter(100, 3)));
-F = fspecial('gaussian', 11, 3);
-G = gauss_filter(11, 3);
+%F = fspecial('gaussian', 11, 3);
+%G = gauss_filter(11, 3);
 %imshow(gauss_filter(100, 3), []);
 %imshow(fspecial('gaussian', 67, 10), []);
 %%%%%%%%%%%
-
+part5();
 
 %%%% Part 4
 %inp1 = imread('inp1.png');
@@ -63,9 +63,27 @@ end
 %%%% Part 5
 function output = part5()
     img = imread('inp2.png');
-    F = abs(fftshift(fft2(img)));
-    L = log(F);
+    F = fft2(img);
+    L = log(abs(F));
     imshow(L, []);
+    F(49:68, 1:2) = 0;
+    F(49:68, 238 - 2 : end) = 0;
+    
+    F(199:204, 1:2) = 0;
+    F(199:204, 238 - 2 : end) = 0;
+    
+    F(252:270, 1:2) = 0;
+    F(252:270, 238 - 2 : end) = 0;
+    
+    F(116:121, 1:2) = 0;
+    F(116:121, 238 - 2 : end) = 0;
+    imshow(log(abs(F)), []);
+    %F = imfilter(F, fspecial('average', 1));
+    %imshow(abs(log(F)), []);
+    filt_img = ifft2(F);
+    %filt_img = imfilter(filt_img, fspecial('average', 4));
+    %filt_img = imfilter(filt_img, fspecial('gaussian', 4));
+    imshow(filt_img, []);
 end
 
 %%%%%%%%%
