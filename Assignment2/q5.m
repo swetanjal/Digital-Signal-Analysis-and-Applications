@@ -1,11 +1,11 @@
 %%% DFT
-img = double(imread('fruits.png'));
+%img = double(imread('fruits.png'));
 %inbuilt = fft2(img);
 %DFT = twodDFT(img);
 %imagesc(log(abs(DFT)));
 %imagesc(log(abs(inbuilt)));
-FFT = RECURSIVEtwodFFT(img);
-imagesc(log(abs(FFT)));
+%FFT = RECURSIVEtwodFFT(img);
+%imagesc(log(abs(FFT)));
 %%%%%%%%
 %%% FFT
 %arr = [1,2;3,4];
