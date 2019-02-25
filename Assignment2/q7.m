@@ -1,10 +1,10 @@
-spec(1000, 2);
+%spec(1000, 2);
 %spectrogram(audioread('chirp.wav'), 1000, 2, 'yaxis');
 %%%%Part 2
 %spectrogram(audioread('message.wav'), 2000, 'yaxis');
 %%% Answer is Joker.
 %%%%%%%%%%
-%part3();
+part3();
 %%%%Part 3
 function output = part3()
     Fs = 44100;

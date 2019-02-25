@@ -1,5 +1,5 @@
 %%% Part 3
-%img = imread('cameraman.tif');
+img = imread('cameraman.tif');
 %imshow(median_filter(img, 1));
 %imshow(median_filter(img, 5));
 %imshow(median_filter(img, 10));
@@ -8,13 +8,13 @@
 %imshow(imfilter(img, gauss_filter(67, 1)));
 %imshow(imfilter(img, gauss_filter(80, 10)));
 %imshow(imfilter(img, gauss_filter(80, 3)));
-%imshow(imfilter(img, gauss_filter(100, 3)));
+imshow(imfilter(img, gauss_filter(100, 3)));
 %F = fspecial('gaussian', 11, 3);
 %G = gauss_filter(11, 3);
 %imshow(gauss_filter(100, 3), []);
 %imshow(fspecial('gaussian', 67, 10), []);
 %%%%%%%%%%%
-part5();
+%part5();
 
 %%%% Part 4
 %inp1 = imread('inp1.png');
