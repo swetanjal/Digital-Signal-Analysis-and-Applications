@@ -1,8 +1,8 @@
-[y1, Fs] = audioread('./q5/1.wav');
-[y2, Fs] = audioread('./q5/2.wav');
-[y3, Fs] = audioread('./q5/3.wav');
-[y4, Fs] = audioread('./q5/4.wav');
-[y5, Fs] = audioread('./q5/5.wav');
+[y1, Fs] = audioread('~/q5/1.wav');
+[y2, Fs] = audioread('~/q5/2.wav');
+[y3, Fs] = audioread('~/q5/3.wav');
+[y4, Fs] = audioread('~/q5/4.wav');
+[y5, Fs] = audioread('~/q5/5.wav');
 
 done = [0; 0; 0; 0; 0];
 % We get a cyclic order: 3 5 1 2 4
