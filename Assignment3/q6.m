@@ -1,18 +1,25 @@
 I = double(imread('cameraman256.tif'));
-x = [7, 17, 27, 37, 47, 99];
-y_inefficient = [];
-y_efficient = [];
-for i = 1 : 6
-    tic;
-    a1 = moving_average_inefficient(I, x(i));
-    y_inefficient = [y_inefficient, toc];
-    tic;
-    b1 = moving_average_efficient(I, x(i));
-    y_efficient = [y_efficient, toc];
-end
-hold on;
-plot(x, y_efficient, 'o', 'MarkerSize', 12);
-plot(x, y_inefficient, 'x', 'MarkerSize', 12);
+%x = [7, 17, 27, 37, 47, 99];
+%y_inefficient512 = [];
+%y_efficient512 = [];
+%for i = 1 : 6
+%    tic;
+%    a1 = moving_average_inefficient(I, x(i));
+%    y_inefficient512 = [y_inefficient512, toc];
+%    tic;
+%    b1 = moving_average_efficient(I, x(i));
+%    y_efficient512 = [y_efficient512, toc];
+%end
+%hold on;
+%plot(x, y_efficient, '--', 'MarkerSize', 12, 'color', 'red');
+%plot(x, y_inefficient, 'MarkerSize', 12, 'color', 'red');
+
+%plot(x, y_efficient256, '--', 'MarkerSize', 12, 'color', 'blue');
+%plot(x, y_inefficient256, 'MarkerSize', 12, 'color', 'blue');
+
+
+%plot(x, y_efficient512, '--', 'MarkerSize', 12, 'color', 'green');
+%plot(x, y_inefficient512, 'MarkerSize', 12, 'color', 'green');
 
 imshow(I, []);
 imshow(moving_average_efficient(I, 7), []);
