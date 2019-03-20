@@ -1,10 +1,21 @@
 I = double(imread('cameraman256.tif'));
-tic;
-a1 = moving_average_inefficient(I, 7);
-disp(toc);
-tic;
-b1 = moving_average_efficient(I, 7);
-disp(toc);
+x = [7, 17, 27, 37, 47, 99];
+y_inefficient = [];
+y_efficient = [];
+for i = 1 : 6
+    tic;
+    a1 = moving_average_inefficient(I, x(i));
+    y_inefficient = [y_inefficient, toc];
+    tic;
+    b1 = moving_average_efficient(I, x(i));
+    y_efficient = [y_efficient, toc];
+end
+hold on;
+plot(x, y_efficient, 'o', 'MarkerSize', 12);
+plot(x, y_inefficient, 'x', 'MarkerSize', 12);
+
+imshow(I, []);
+imshow(moving_average_efficient(I, 7), []);
 function output = moving_average_inefficient(img, k)
     filter = ones(k) ./ (k * k);
     output = zeros(size(img, 1), size(img, 2));

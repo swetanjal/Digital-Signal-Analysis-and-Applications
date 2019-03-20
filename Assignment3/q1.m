@@ -28,6 +28,7 @@ X_train_normalized(:, 3) = (X_train(:, 3) - mean(X_train(:, 3))) ./ range(X_trai
 new_b = inv(X_train_normalized' * X_train_normalized) * X_train_normalized' * Y_train;
 normalized_features = [1; (1400 - mean(X_train(:, 2)))./range(X_train(:, 2)); (4 - mean(X_train(:, 3)))./range(X_train(:, 3))];
 res_normalized = new_b' * normalized_features;
+disp(res_normalized);
 % Using this formula does not require any feature scaling, and you will get an exact solution in one calculation: 
 % there is no 'loop until convergence' like in gradient descent. So doesn't
 % help.
@@ -39,3 +40,7 @@ mean3 = mean(X_train(:, 3));
 y_mean = mean(Y_train(:, 1));
 y_pred = b' * [mean1; mean2; mean3]; % Yes passes the regression line.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Computing the % error
+pred_y = X_test * b;
+error = abs(norm(Y_test, 2) - norm(pred_y, 2)) / norm(Y_test, 2) * 100;
+disp(error);
