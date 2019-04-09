@@ -9,6 +9,7 @@ disp(imDCT);
 imqDCT = myDCT_quantization(imDCT, mat, c);
 disp(imqDCT);
 disp(myIDCT(myDCT_dequantization(imqDCT, mat, c) , F));
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%% (427, 298) %%%%%%%%%
 im = double(img(427 : 427 + 8 - 1, 298 : 298 + 8 - 1));
@@ -17,6 +18,7 @@ disp(imDCT);
 imqDCT = myDCT_quantization(imDCT, mat, c);
 disp(imqDCT);
 disp(myIDCT(myDCT_dequantization(imqDCT, mat, c) , F));
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%% (30, 230) %%%%%%%%%%%
 im = double(img(30 : 30 + 8 - 1, 230 : 230 + 8 - 1));
