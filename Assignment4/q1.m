@@ -66,7 +66,8 @@ for i = 1 : 8 : size(img, 1)
     reconstructed_img = [reconstructed_img; temp];
 end
 imshow(reconstructed_img, []);
-disp("Entropy: " + My_entropy(reconstructed_img)); % 0.0025
+disp("Entropy: " + My_entropy(uint8(reconstructed_img))); % 0.0025
+disp("Entropy using inbuilt function: " + entropy(uint8(reconstructed_img)));
 disp("Root Mean Square Error: " + RMSE(reconstructed_img, img)); % 8.5218
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 function output = create_mat_dct()

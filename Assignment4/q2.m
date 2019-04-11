@@ -14,7 +14,7 @@ for i = 0 : 7
     end
 end
 %%% PCA %%%
-dim = 256;
+dim = 35;
 G = X * X';
 [V, D] = eigs(G, dim);
 D = sum(D);
