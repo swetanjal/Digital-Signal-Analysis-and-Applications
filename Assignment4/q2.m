@@ -14,7 +14,7 @@ for i = 0 : 7
     end
 end
 %%% PCA %%%
-dim = 35;
+dim = 256;
 G = X * X';
 [V, D] = eigs(G, dim);
 D = sum(D);
@@ -31,8 +31,8 @@ imshow(reshape(images(18, :), [256 256 3]));
 %%% Plots %%%
 oned = X * E(:, 1);
 y = zeros(N, 1);
-scatter(oned, y);
+%scatter(oned, y);
 twod = X * E(:, 1 : 2);
-scatter(twod(:, 1), twod(:, 2));
+%scatter(twod(:, 1), twod(:, 2));
 threed = X * E(:, 1 : 3);
-scatter3(threed(:, 1), threed(:, 2), threed(:, 3));
+%scatter3(threed(:, 1), threed(:, 2), threed(:, 3));

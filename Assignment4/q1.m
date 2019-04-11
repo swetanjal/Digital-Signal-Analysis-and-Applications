@@ -5,30 +5,40 @@ img = imread('LAKE.TIF');
 %%%%%%% (420, 45) %%%%%%%%%
 im = double(img(420 : 420 + 8 - 1, 45 : 45 + 8 - 1));
 imDCT = myDCT(im, F);
-disp(imDCT);
+%disp(imDCT);
 imqDCT = myDCT_quantization(imDCT, mat, c);
-disp(imqDCT);
-disp(myIDCT(myDCT_dequantization(imqDCT, mat, c) , F));
-
+%disp(imqDCT);
+%disp(myDCT_dequantization(imqDCT, mat, c));
+%disp(myIDCT(myDCT_dequantization(imqDCT, mat, c) , F));
+%disp(im);
+%imshow( im, []);
+%imshow(myIDCT(myDCT_dequantization(imqDCT, mat, c) , F), []);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%% (427, 298) %%%%%%%%%
 im = double(img(427 : 427 + 8 - 1, 298 : 298 + 8 - 1));
 imDCT = myDCT(im, F);
-disp(imDCT);
+%disp(imDCT);
 imqDCT = myDCT_quantization(imDCT, mat, c);
-disp(imqDCT);
-disp(myIDCT(myDCT_dequantization(imqDCT, mat, c) , F));
-
+%disp(imqDCT);
+%disp(myDCT_dequantization(imqDCT, mat, c));
+%disp(myIDCT(myDCT_dequantization(imqDCT, mat, c) , F));
+%disp(im);
+%imshow( im, []);
+%imshow(myIDCT(myDCT_dequantization(imqDCT, mat, c) , F), []);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%% (30, 230) %%%%%%%%%%%
 im = double(img(30 : 30 + 8 - 1, 230 : 230 + 8 - 1));
 imDCT = myDCT(im, F);
-disp(imDCT);
+%disp(imDCT);
 imqDCT = myDCT_quantization(imDCT, mat, c);
-disp(imqDCT);
-disp(myIDCT(myDCT_dequantization(imqDCT, mat, c) , F));
+%disp(imqDCT);
+%disp(myDCT_dequantization(imqDCT, mat, c));
+%disp(myIDCT(myDCT_dequantization(imqDCT, mat, c) , F));
+%disp(im);
+%imshow( im, []);
+%imshow(myIDCT(myDCT_dequantization(imqDCT, mat, c) , F), []);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-c = 5; % 5 makes distortions of the reconstructed image just perceptible 
+c = 10; % 5 makes distortions of the reconstructed image just perceptible 
 compressed = [];
 % Compressing the image %
 for i = 1 : 8 : size(img, 1)
@@ -42,6 +52,7 @@ for i = 1 : 8 : size(img, 1)
     compressed = [compressed; temp];
 end
 %imshow(compressed, []);
+%disp(compressed);
 % Reconstructing the image %
 reconstructed_img = [];
 for i = 1 : 8 : size(img, 1)
